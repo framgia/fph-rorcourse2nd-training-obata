@@ -1,11 +1,37 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-  <%= link_to "sample app", '#', id: "logo" %>
-  <nav>
-    <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "Home",   '#' %></li>
-      <li><%= link_to "Help",   '#' %></li>
-      <li><%= link_to "Log in", '#' %></li>  </ul>
-   </nav>
-  </div>
-</header>
+<!DOCTYPE html>
+        <div id="app" class="container-fullwidth">
+            <nav class="navbar navbar-expand-lg navbar-light bg-faded">
+                <a class="navbar-brand" href="#">Project Name</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="navbarNavDropdown" class="navbar-collapse collapse">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item">
+                        <%= link_to "Home", root_path %>
+                      </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                      
+                      <% if logged_in? %>
+                        <li><%= link_to "Users", '#' %></li> 
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Account <b class="caret"></b>
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><%= link_to "Profile", "sells#new" %></li>
+                            <li><%= link_to "Settings", "sells/new" %></li>
+                            <li><%= link_to "Log out", logout_path , method: :delete %></li>
+                          </ul>
+                        </li>
+        
+                      <% else %>    
+        
+                        <li><%= link_to "Log in", login_path %></li>
+                      
+                      <% end %>
+                    </ul>
+                </div>
+            </nav>
+        </div>
