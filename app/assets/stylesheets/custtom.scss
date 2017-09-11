@@ -1,16 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* mixins, variables, etc. */
-
-$gray-medium-light: #eaeaea;
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
-
 
 /* universal */
 
@@ -33,7 +23,6 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
-
 
 /* typography */
 
@@ -85,35 +74,30 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
+  border-top: 1px solid #eaeaea;
+  color: #777;
 }
 
-/* miscellaneous */
+footer a {
+  color: #555;
+}
 
-.debug_dump {
-  clear: both;
+footer a:hover {
+  color: #222;
+}
+
+footer small {
   float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
 }
 
 /* sidebar */
@@ -191,21 +175,18 @@ aside {
   padding: 0;
 }
 
-
-
 /* forms */
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
-  @include box_sizing;
+  @include box_sizing(border-box);
 }
 
 input {
   height: auto !important;
 }
-
 
 #error_explanation {
   color: red;
@@ -236,8 +217,6 @@ input {
   margin-left: 0;
 }
 
-/* Users index */
-
 .users {
   list-style: none;
   margin: 0;
@@ -248,14 +227,11 @@ input {
   }
 }
 
-
-/* microposts */
-
 .microposts {
   list-style: none;
   padding: 0;
   li {
-    padding: 10px 0;
+    padding: 20px 0;
     border-top: 1px solid #e8e8e8;
   }
   .user {
