@@ -12,17 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20170907032756) do
 
-  create_table "staticpages", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin"
+    t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
