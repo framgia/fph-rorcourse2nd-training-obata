@@ -1,0 +1,9 @@
+<% provide(:title,"index") %>
+<h1>All users</h1>
+<ul class="users">
+<%= will_paginate %>
+<% @users.each do |user| %>
+  <%= render user %>
+<% end %>
+<%= will_paginate %>
+</ul>

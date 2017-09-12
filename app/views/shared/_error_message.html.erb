@@ -1,0 +1,14 @@
+<% if object.errors.any? %>
+<!--objectが自動で最適なagumentを取得-->
+<!--単品だと@userなどが入る場所にobject-->
+    <div id="error_explanation">
+        <div class="alert alert-danger">
+            The form contains <%= pluralize(object.errors.count, "error") %>
+        </div>
+        <ul>
+            <% object.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
