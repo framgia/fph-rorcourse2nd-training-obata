@@ -27,10 +27,17 @@ class UsersController < ApplicationController
     #　User　=　モデル
     #　.new　=　class(設計図)の情報をobjectにする
     #　→これで、DBに情報入れれる状態にする
+
     if @user.save
+      # INSERTと同じ
+      #.save →  DBに情報入れた
+       
       flash[:success] = "success!"
-      log_in @user
+      #ポップアップ
+       
       redirect_to root_url
+      #前　ー　その情報のところにいく　=SHOWページにいく
+      #メール認証追加後　ー　トップへ飛ぶ設定
     else
      render 'new'
     end
