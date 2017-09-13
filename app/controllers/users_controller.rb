@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     if @user.save
       # INSERTと同じ
       #.save →  DBに情報入れた
-       
+      log_in @user
       flash[:success] = "success!"
       #ポップアップ
        
@@ -58,6 +58,35 @@ class UsersController < ApplicationController
       redirect_to users_path
   end
   
+#----
+#以下、フォロー機能のカスタムフィールドのためです。----
+#----
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+    # 実際はshow_followページに飛ぶだけ。ただ、SHOWと同じで、各ユーザーごとにshow_followページがあるため。
+    # ここでは飛んだ先で、@title、@title、@users(全てユーザー関連ではあるが)の情報を３渡してる。
+    # でも、ユーザーの持ってる
+  end
+
+  #Sample Route: /users/32/following
+  
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+#ルート
+# memberの能力
+# URLは２つ、ファイルは１つ
+# ①コントローラーで飛ぶURLと同じ名前、memberのgetと同じ名前、のmethodを書く、
+# ②情報を挙列させると、カスタムポストテンプレートのように、部分的に別の表示をさせることができる
+  
+  
+  
   private
 
     def user_params
@@ -83,4 +112,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
+    
+
 end

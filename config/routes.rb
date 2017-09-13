@@ -11,10 +11,17 @@ get '/signup', to: 'users#new'
 post '/signup', to: 'users#create'
 #userでsignupというアドレスを作る
 
-get '/login', to:'sessions#new'
-post '/login', to:'sessions#create'
-delete '/logout', to:'sessions#destroy'
+get    '/login',   to: 'sessions#new'
+post   '/login',   to: 'sessions#create'
+delete '/logout', to: 'sessions#destroy'
 
-resources :users
-  
+resources :users do
+  member do
+    get :following, :followers
+  end
+end
+#followingとfollowersのuser個別ページで、userの情報も、followingも情報も持ってきつつ自由に扱うため
+
+resources :relationships, only: [:create, :destroy]
+
 end
