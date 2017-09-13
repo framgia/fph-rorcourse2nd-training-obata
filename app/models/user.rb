@@ -20,6 +20,42 @@ class User < ApplicationRecord
   # allow_nil: true　でemptyでもOK。
   
   #—————
+  #以下はフォロー/アンフォローのためです。—————
+  #—————
+  
+    #フォローする設定ーーーーーーー
+    #ーーーーーーーーーーーーーーー
+    has_many :active_relationships,   
+    #ここに本来ならモデルの名前が入る
+    # Userは、active_relationships(イマジナリーテーブル)を持つことができる。という意味。
+                                    class_name:  "Relationship",
+                                    #テーブルRelationshipと繋げてる。
+                                    foreign_key: "follower_id",
+                                    #結論　→　follower_id(フォローしてる人一覧)と結びつける
+                                    dependent:   :destroy
+                                    #親が死んだら、子も死ぬ
+    # 結論、active_relationshipsは、「フォローしてる人(全員)(IDのみ)」
+                                    
+    has_many :following, through: :active_relationships, source: :followed
+    # following(フォローしてる)もイマジナリーテーブル
+    # followingは情報が１つだけ。(active_relationshipsはたくさん情報が入ってる)
+    # through　-　あるテーブルから情報を引っ張ってくる
+    # 結論、followingは、「フォローしてる特定の１人の情報」
+    
+      #フォローされる設定ーーーーーーー
+    #ーーーーーーーーーーーーーーー
+    has_many :passive_relationships, class_name:  "Relationship",
+                                     foreign_key: "followed_id",
+                                     dependent:   :destroy
+    has_many :followers, through: :passive_relationships, source: :follower
+  
+    # 結論、passive_relationships、「だれにフォローされてる(全員)(IDのみ)」っていうだけ  
+    # 結論、followersは、「だれフォローされてる(特定の１人)(名前やE-mailなどの情報)」っていうだけ
+    
+    #状態を聞くアクションメソッドは、親側(直接MODELに命令を下さない側)で行う
+    #まあ、単純にユーザー通しの関係性(リレーション)だから、主語はユーザー。
+  
+  #—————
   #以下はリメンバーのためです。—————
   #—————
   attr_accessor :remember_token
@@ -60,5 +96,20 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end  
+  
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
+  end
  
 end
