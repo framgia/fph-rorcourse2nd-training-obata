@@ -15,7 +15,11 @@ class SessionsController < ApplicationController
       #　セッションヘルパーの、log_in(user)を使ってる
       #すでに有効アカウント？# ここで、いわゆる"ログインした"って状態になって。。
       #params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_back_or user
+      
+      #redirect_back_or user
+      redirect_to root_url
+      
+      
     else
       # Create an error message.
       flash.now[:danger] = 'Invalid email/password combination'

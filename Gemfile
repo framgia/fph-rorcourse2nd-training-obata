@@ -8,6 +8,8 @@ end
 #パスワードのハッシュ化
 gem 'bcrypt','3.1.11'
 
+gem 'faker','1.7.3'
+
 # gem 'bootstrap'
 gem 'jquery-rails'
 

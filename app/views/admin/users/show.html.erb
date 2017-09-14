@@ -1,0 +1,40 @@
+<% provide(:title,"Show") %>
+<div class="row">
+  <aside class="col-md4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+      <%= render "users/follower_form" %>
+    </section>
+  </aside>
+  
+  
+  <!--Masa Code-->
+  
+   <!--<div class="col-md-8">-->
+    <!--% unless current_user?(@user) %>
+     <div id= "follower_form">
+      <!--% if current_user.following?(@user) %>
+      
+       <!--%= form_for(current_user.active_relationships.find_by(followed_id: @user.id), remote: true, html: { method: :delete }) do  |f| %>
+         <!--%= f.submit "Unfollow", class: "btn" %>
+       <!--% end %>
+       
+      <!--% else %>
+      
+       <!--%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
+        <div><!--%= hidden_field_tag :followed_id, @user.id %></div>
+        <!--%= f.submit "Follow", class:"btn btn-primary" %>
+       <!--% end %>
+       
+      <!--% end %>
+     </div>
+    <!--% end %>
+  </div>
+  
+</div>
