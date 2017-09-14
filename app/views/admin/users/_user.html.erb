@@ -1,0 +1,14 @@
+<li>
+<%= gravatar_for user, size: 50 %>
+
+<!--%= link_to user.name, user %-->
+
+<%= link_to user.name, admin_user_path(user) %>
+
+<!-- 自分自身が、管理者　としてログインしてる時に、 -->
+<!-- 自分自身のユーザー名以外の棚に現れる -->
+<% if current_user.admin? && !current_user?(user) %>
+| <%= link_to 'edit', edit_admin_user_path(user) %>
+| <%= link_to "delete", admin_user_path(user), method: :delete, data: { confirm: "you sure?" } %>
+<% end %>
+</li>

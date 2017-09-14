@@ -1,0 +1,48 @@
+<h1>Admin::Dashboard#index</h1>
+
+<div class="wrapper">
+ <div class="content-wrapper" style="min-height: 906px;">
+<br>
+<section class="content-header">
+  <h1>Administrator Dashboard</h1>
+    <ol class="breadcrumb">
+      <li><i class="fa fa-dashboard"></i>Home</li>
+      <li class="active">Link 1</li>
+      <li class="active">Link 2</li>
+    </ol>
+</section>
+
+
+<nav class="navbar navbar-static-top" role="navigation">
+  <div class="navbar-custom-menu">        
+          <!--%= link_to image_tag(current_user.avatar, size: "100x100"), current_user %-->
+
+          <span class="hidden-xs">
+            <!--%= t ".logged_user" %>
+            <!--%= current_user.full_name %-->
+          </span>
+    
+    
+  </div>
+</nav>
+
+<div class="box-whitesmoke">
+
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+      <div class="small-box bg-yellow2">
+        <div class="inner">
+          <h3><%= User.count %></h3>
+          <p><%= t ".user" %></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-person-add"></i>
+        </div>
+          <a href="#" class="small-box-footer"><%= link_to t(".userlist"),
+            admin_users_path %><i class="fa fa-arrow-circle-right"></i>
+          </a>
+      </div>
+    </div>
+  </div>
+  
+</div>

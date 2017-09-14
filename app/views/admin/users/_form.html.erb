@@ -1,0 +1,22 @@
+
+
+<!--%= form_for(@user) do |f| %-->
+
+<%= form_for [:admin, @user] do |f| %>
+
+<%= render 'shared/error_message', object: f.object %>
+<%= f.label :name %>
+<%= f.text_field :name, class: 'form-control form-width' %>
+<%= f.label :email %>
+<%= f.email_field :email, class: 'form-control' %>
+<%= f.label :password %>
+<%= f.password_field :password, class: 'form-control' %>
+<%= f.label :password_confirmation, "Confirmation" %>
+<%= f.password_field :password_confirmation, class: 'form-control' %>
+<%= f.label :admin, class: "checkbox inline" do %>
+<%= f.check_box :admin, class: 'form-control' %>
+<span>Is this user admin?</span>
+<% end %>
+<br>
+<%= f.submit "Save changes", class: "btn btn-primary" %>
+<% end %>

@@ -1,5 +1,25 @@
 Rails.application.routes.draw do
 
+  # namespace :admin do
+  #   get 'users/index'
+  # end
+
+  # namespace :admin do
+  #   get 'users/new'
+  # end
+
+  # namespace :admin do
+  #   get 'users/edit'
+  # end
+
+  # namespace :admin do
+  #   get 'users/show'
+  # end
+
+  # get 'admin/categories'
+
+  # get 'admin/users'
+
 root 'static_pages#home'
   
 get '/help', to:'static_pages#help', as:'help'
@@ -23,5 +43,16 @@ end
 #followingとfollowersのuser個別ページで、userの情報も、followingも情報も持ってきつつ自由に扱うため
 
 resources :relationships, only: [:create, :destroy]
+
+
+namespace :admin do
+  #ここをadminにすることで自動でログイン時の分別
+    root 'dashboard#index'
+    get 'dashboard/index'
+    resources :users
+    resources :categories
+end
+
+
 
 end
